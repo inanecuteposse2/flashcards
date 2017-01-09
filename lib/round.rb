@@ -11,17 +11,17 @@ class Round
   end
 
   def current_card
-    all_cards = deck.cards
+    all_cards = @deck.cards
     all_cards[@current_card]
   end
 
   def start
-    puts "Welcome! You're playing with 4 cards."
+    puts "Welcome! You're playing with #{@deck.length} cards."
   "---------------------------------------------------------------------"
-  puts "This is card number #{@current_card + 1} out of 4."
-  puts "Question: #{deck.cards[0].question}"
+  puts "This is card number #{@current_card + 1} out of #{@deck.length}."
+  puts "Question: #{@deck.cards[0].question}"
   response = gets.chomp.downcase.to_i
-  guess = Guess.new(response, deck.cards[0])
+  guess = Guess.new(response, @deck.cards[0])
   puts "#{guess.feedback}"
   end
 
