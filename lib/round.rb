@@ -16,13 +16,23 @@ class Round
   end
 
   def start
-    puts "Welcome! You're playing with #{@deck.length} cards."
-  "---------------------------------------------------------------------"
-  puts "This is card number #{@current_card + 1} out of #{@deck.length}."
-  puts "Question: #{@deck.cards[0].question}"
-  response = gets.chomp.downcase.to_i
-  guess = Guess.new(response, @deck.cards[0])
-  puts "#{guess.feedback}"
+    puts "Welcome! You're playing with #{@deck.cards.length} cards."
+    puts "---------------------------------------------------------------------"
+    evaluate_questions
+  end
+
+  def evaluate_questions
+
+    until (@current_card + 1) > @deck.cards.length
+      puts "This is card number #{@current_card + 1} out of #{@deck.cards.length}."
+      puts "Question: #{@deck.cards[@current_card].question}"
+      response = gets.chomp.downcase
+      guess = Guess.new(response, @deck.cards[@current_card])
+      puts "#{guess.feedback}"
+      @current_card += 1
+    end
+    puts "yay!"
+
   end
 
   def record_guess(guess)
